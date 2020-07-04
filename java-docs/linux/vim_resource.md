@@ -1,0 +1,10 @@
+vim资源
+#### 网络上很多 vim 的资源，甚至练习的小游戏
+- 《Practical vim》
+- 《笨方法学vimscript》
+- 学习和开发自己的插件
+
+#### 官方自带教程
+- 进入terminal中输入vimtutor进入官方教程
+- 在vim中输入 :help 进入帮助文档
+
