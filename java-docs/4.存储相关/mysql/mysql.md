@@ -1,0 +1,28 @@
+#### 问题场景一：insert into select死锁
+````sql
+INSERT INTO order_record 
+SELECT * FROM order_today 
+WHERE pay_success_time < '2020-03-08 00:00:00';
+````
+#####出现的原因  
+在默认的事务隔离级别下：insert into order_record select * from order_today   
+加锁规则是：order_record表锁，order_today逐步锁（扫描一个锁一个）。  
+
+##### 分析执行过程  
+order_today是全表扫描，也就意味着在执行insert into select from 语句时，  
+mysql会从上到下扫描order_today内的记录并且加锁
+
+##### 解决方案:
+由于查询条件会导致order_today全表扫描，什么能避免全表扫描呢，很简单嘛，  
+给pay_success_time字段添加一个idx_pay_suc_time索引就可以了，由于走索引  
+查询，就不会出现扫描全表的情况而锁表了，只会锁定符合条件的记录。
+
+##### 最终SQL
+````sql
+INSERT INTO order_record SELECT
+    * 
+FROM
+    order_today FORCE INDEX (idx_pay_suc_time)
+WHERE
+    pay_success_time <= '2020-03-08 00:00:00';
+````
