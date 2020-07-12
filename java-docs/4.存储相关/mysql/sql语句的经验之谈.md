@@ -1,0 +1,157 @@
+##### 1. 不论一个sql中涉及到多少表，每次都用两个表（结果集）操作，得到新的结果后，再和下一个表（结果集）操作。
+
+##### 2. 避免在select f1,(select f2 from tableB ).... from tableA 这样得到字段列。直接用tableA和tableB关联得到A.f1,B.f2就可以了。
+
+##### 3. 避免隐含的类型转换,如：
+````sql
+select id from employee where emp_id='8'  （错）
+select id from employee where emp_id=8    （对）
+````  
+emp_id是整数型，用'8'会默认启动类型转换，增加查询的开销。  
+##### 4. 尽量减少使用正则表达式，尽量不使用通配符。
+
+
+
+##### 5. 使用关键字代替函数
+
+如：
+````sql
+select id from employee where UPPER(dept) like 'TECH_DB'  （错）
+select id from employee where SUBSTR(dept,1,4)='TECH'    （错）
+select id from employee where dept like 'TECH%'         （对）
+ ````
+
+##### 6.不要在字段上用转换函数，尽量在常量上用
+
+如：
+````sql
+select id from employee
+where to_char(create_date,'yyyy-mm-dd')='2012-10-31'  （错）
+````
+````sql
+select id from employee
+where create_date=to_date('2012-10-31','yyyy-mm-dd')   （对）
+ ````
+
+##### 7.不使用联接做查询
+
+如：
+````sql
+select id from employee where first_name || last_name like 'Jo%'  （错）
+ ````
+
+##### 8. 尽量避免前后都用通配符
+
+如：
+````sql
+select id from employee where dept like '%TECH%' (错）
+select id from employee where dept like 'TECH%' （对）
+````
+
+##### 9. 判断条件顺序
+
+如：
+````sql
+select id from employee
+where creat_date-30>to_date('2012-10-31','yyyy-mm-dd')   （错）
+````
+
+````sql
+select id from employee
+where creat_date >to_date('2012-10-31','yyyy-mm-dd')+30   （对）
+````    
+
+##### 10. 尽量使用exists而非in
+
+当然这个也要根据记录的情况来定用exists还是用in, 通常的情况是用exists
+````sql
+select id from employee where salary in
+(select salary from emp_level where....)   （错）
+ ````
+````sql  
+select id from employee where salary exists
+(select 'X' from emp_level where ....)   （对）
+ ````
+
+##### 11. 使用not exists 而非not in，代码和上面的类似。
+
+    
+
+##### 12. 减少查询表的记录数范围
+
+
+
+##### 13.正确使用索引
+
+索引可以提高速度，一般来说，选择度越高，索引的效率越高。
+
+
+
+
+
+##### 14. 索引类型
+
+唯一索引，对于查询用到的字段，尽可能使用唯一索引。
+
+还有一些其他类型，如位图索引，在性别字段，只有男女的字段上用。
+
+
+
+##### 15. 在经常进行连接，但是没有指定为外键的列上建立索引
+
+
+
+#####16. 在频繁进行排序会分组的列上建立索引，如经常做group by 或 order by 操作的字段。
+
+
+
+##### 17. 在条件表达式中经常用到的不同值较多的列上建立检索，在不同值少的列上不建立索引。
+
+
+
+如性别列上只有男，女两个不同的值，就没必要建立索引（或建立位图索引）。如果建立索引不但不会提高查询效率，反而会严重降低更新速度。
+
+
+
+##### 18. 在值比较少的字段做order by时，翻页会出现记录紊乱问题，要带上id字段一起做order by.
+
+
+
+##### 19. 不要使用空字符串进行查询
+
+如：
+````sql
+select id from employee where emp_name like '%%' （错）
+````
+
+###### 20. 尽量对经常用作group by的关键字段做索引。
+
+
+
+###### 21. 正确使用表关联
+
+利用外连接替换效率十分低下的not in运算，大大提高运行速度。
+
+如：
+````sql
+select a.id from employee a where a.emp_no not in
+(select emp_no from employee1 where job ='SALE')  （错）
+````    
+
+
+
+##### 22. 使用临时表    
+
+在必要的情况下，为减少读取次数，可以使用经过索引的临时表加快速度。
+
+如：
+````sql
+select e.id from employee e ,dept d where
+e.dept_id=d.id and e.empno>1000 order by e.id   （错）
+ ````
+
+````sql
+select id,empno from employee into temp_empl
+where empno>1000 order by id
+select m.id from temp_emp1 m,dept d where m.empno=d.id （对）
+````
