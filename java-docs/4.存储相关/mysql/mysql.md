@@ -1,6 +1,6 @@
 #### 问题场景一：insert into select死锁
-````sql
-INSERT INTO order_record 
+````shell script
+INSERT INTO `order_record` 
 SELECT * FROM order_today 
 WHERE pay_success_time < '2020-03-08 00:00:00';
 ````
@@ -18,7 +18,7 @@ mysql会从上到下扫描order_today内的记录并且加锁
 查询，就不会出现扫描全表的情况而锁表了，只会锁定符合条件的记录。
 
 ##### 最终SQL
-````sql
+````shell script
 INSERT INTO order_record SELECT
     * 
 FROM
