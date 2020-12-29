@@ -1,0 +1,7 @@
+@Transactional事务不生效的场景
+1.数据库引擎是否支持事务(Mysql 的Mylsam引擎不支持事务)
+2.注解所在的类是否被加载成Bean
+3.注解所在方法是否为public修饰的
+4.是否发生了自调用问题
+5.所用数据源是否加载了事务管理器
+6.@Transactionl的扩展配置propagation是否正确
