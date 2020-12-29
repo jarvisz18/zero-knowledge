@@ -26,4 +26,14 @@ JDK 8开始把类的元数据放到本地化的堆内存(native heap)中，这�
 使用本地化的内存有什么好处呢？最直接的表现就是java.lang.OutOfMemoryError: PermGen
  空间问题将不复存在， 因为默认的类的元数据分配只受本地内存大小的限制，
  也就是说本地内存剩余多少，理论上Metaspace就可以有多大（貌似容量还与操作系统的虚拟内存有关？这里不太清楚），
- 这解决了空间不足的问题。不过，让Metaspace变得无限大显然是不现实的，因此我们也要限制Metaspace的大小：使用-XX:MaxMetaspaceSize参数来指定Metaspace区域的大小。JVM默认在运行时根据需要动态地设置MaxMetaspaceSize的大小。
+ 这解决了空间不足的问题。不过，让Metaspace变得无限大显然是不现实的，因此我们也要限制Metaspace的大小：  
+ 使用-XX:MaxMetaspaceSize参数来指定Metaspace区域的大小。JVM默认在运行时根据需要动态地设置  
+ MaxMetaspaceSize的大小。
+ 
+ #### 最佳实践：
+ ##### 1.生产环境把 xmx 和 xms 设置成一样  
+ 把xmx和xms设置一致可以让JVM在启动时就直接向OS申请xmx的commited内存，好处是:  
+ 1.避免JVM在运行过程中向OS申请内存  
+ 2.延后启动后首次GC的发生时机  
+ 3.减少启动初期的GC次数  
+ 4.尽可能避免使用swap space

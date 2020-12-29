@@ -36,3 +36,27 @@ nohup /usr/java/jdk1.8.0_131/bin/java -Xms2048m -Xmx2048m -XX:MetaspaceSize=1024
 |N|上一个
 |q|退出less命令
 
+#### 4.find命令
+````shell script
+-name 按照文件名查找文件。  
+-perm 按照文件权限来查找文件。  
+-prune 使用这一选项可以使find命令不在当前指定的目录中查找，  
+       如果同时使用-depth选项，那么-prune将被find命令忽略。
+-user 按照文件属主来查找文件。  
+-group 按照文件所属的组来查找文件。  
+-mtime -n +n 按照文件的更改时间来查找文件，  
+       - n表示文件更改时间距现在n天以内，  
+       + n表示文件更改时间距现在n天以前。
+       find命令还有-atime和-ctime 选项，但它们都和-m time选项。    
+-nogroup 查找无有效所属组的文件，即该文件所属的组在/etc/groups中不存在。  
+-nouser 查找无有效属主的文件，即该文件的属主在/etc/passwd中不存在。  
+-newer file1 ! file2 查找更改时间比文件file1新但比文件file2旧的文件。
+````
+##### 4.1 find命令举例
+````shell script
+查找日志文件更改时间距现在30天以前
+# find /opt -name *.log -mtime +30
+查找日志文件更改时间距现在30天以前并执行删除
+# find /opt -name *.log -mtime +30 -exec rm -rf {} \;
+````
+
