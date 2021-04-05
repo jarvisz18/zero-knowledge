@@ -7,7 +7,7 @@ https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/
 
 #### jps
 https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jps.html  
-**作用**
+##### 作用
 列出目标系统上的已检测Java虚拟机（JVM）
 ##### 命令格式
 jps [ options ] [ hostid ]  
@@ -20,6 +20,11 @@ jps [ options ] [ hostid ]
 |-l	|显示应用程序主类的全限定性名或应用程序JAR文件的完整路径名称。|
 |-v	|显示传递给JVM的参数|
 |-V	|仅显示pid和jar文件名称|
+##### 常用命令
+查看现有的JVM进程
+````shell script
+[root@xianlong ~]# /usr/local/jdk1.8.0_181/bin/jps -l
+````
 
 
 
@@ -46,11 +51,21 @@ where <option> is one of:
     <no option>          to print both of the above
 -h | -help           to print this help message
 ````
+##### 常用命令
+1.打印java进程的配置信息
+````shell script
+[root@xianlong ~]# /usr/local/jdk1.8.0_181/bin/jinfo pid
+````
+2.打印java进程的命令行参数
+````shell script
+[root@xianlong ~]# /usr/local/jdk1.8.0_181/bin/jinfo -flags pid
+````
 
 #### jstat
 https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jstat.html
 
 #####作用
+用于提供与JVM性能相关的统计信息，例如垃圾收集，编译活动
 
 ##### 命令格式
 ````shell script
@@ -84,9 +99,57 @@ count:
 显示的次数。默认值是无穷大；也就是说，JSTAT显示统计数据，直到目标JVM终止或JSTAT命令终止。必须是正整数  
 
 ##### 案例
-1.查看pid垃圾回收情况：  jstat  -gc  pid  5000（时间间隔）
-
-
+1.查看pid垃圾回收情况
+````shell script
+jstat -gc  pid  5000（时间间隔）
+````
+2.执行结果
+````shell script
+[root@xianlong ~]# /usr/local/jdk1.8.0_181/bin/jstat -gc 25085 5000  
+ S0C    S1C    S0U    S1U      EC       EU        OC         OU       MC     MU    CCSC   CCSU   YGC     YGCT    FGC    FGCT     GCT   
+77824.0 82944.0  0.0   30542.4 183296.0 59036.2   426496.0   340988.6  139648.0 132513.9 17280.0 16159.8    125    4.104   8      5.842    9.946
+77824.0 82944.0  0.0   30542.4 183296.0 59036.2   426496.0   340988.6  139648.0 132513.9 17280.0 16159.8    125    4.104   8      5.842    9.946
+77824.0 82944.0  0.0   30542.4 183296.0 59144.5   426496.0   340988.6  139648.0 132513.9 17280.0 16159.8    125    4.104   8      5.842    9.946
+77824.0 82944.0  0.0   30542.4 183296.0 59146.6   426496.0   340988.6  139648.0 132513.9 17280.0 16159.8    125    4.104   8      5.842    9.946
+````
+3.参数解释  
+````shell script
+S0C：年轻代中第一个survivor（幸存区）的容量 (kb)  
+S1C：年轻代中第二个survivor（幸存区）的容量 (kb)  
+S0U：年轻代中第一个survivor（幸存区）目前已使用空间 (kb)  
+S1U：年轻代中第二个survivor（幸存区）目前已使用空间 (kb)  
+EC：年轻代中Eden（伊甸园）的容量 (kb)  
+EU：年轻代中Eden（伊甸园）目前已使用空间 (kb)  
+OC：Old代的容量 (kb)  
+OU：Old代目前已使用空间 (kb)  
+PC：Perm(持久代)的容量 (kb)  
+PU：Perm(持久代)目前已使用空间 (kb)  
+YGC：从应用程序启动到采样时年轻代中gc次数  
+YGCT：从应用程序启动到采样时年轻代中gc所用时间(s)  
+FGC：从应用程序启动到采样时old代(全gc)gc次数  
+FGCT：从应用程序启动到采样时old代(全gc)gc所用时间(s)  
+GCT：从应用程序启动到采样时gc用的总时间(s)  
+NGCMN：年轻代(young)中初始化(最小)的大小 (kb)  
+NGCMX：年轻代(young)的最大容量 (kb)  
+NGC：年轻代(young)中当前的容量 (kb)  
+OGCMN：old代中初始化(最小)的大小 (kb)  
+OGCMX：old代的最大容量 (kb)  
+OGC：old代当前新生成的容量 (kb)  
+PGCMN：perm代中初始化(最小)的大小 (kb)  
+PGCMX：perm代的最大容量 (kb)  
+PGC：perm代当前新生成的容量 (kb)  
+S0：年轻代中第一个survivor（幸存区）已使用的占当前容量百分比  
+S1：年轻代中第二个survivor（幸存区）已使用的占当前容量百分比  
+E：年轻代中Eden（伊甸园）已使用的占当前容量百分比  
+O：old代已使用的占当前容量百分比  
+P：perm代已使用的占当前容量百分比  
+S0CMX：年轻代中第一个survivor（幸存区）的最大容量 (kb)  
+S1CMX ：年轻代中第二个survivor（幸存区）的最大容量 (kb)  
+ECMX：年轻代中Eden（伊甸园）的最大容量 (kb)  
+DSS：当前需要survivor（幸存区）的容量 (kb)（Eden区已满）  
+TT： 持有次数限制  
+MTT ： 最大持有次数限制  
+````
 
 #### jmap：
 https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jmap.html
@@ -120,11 +183,26 @@ option
 •	help：打印帮助信息  
 •	J<flag>：指定传递给运行jmap的JVM的参数  
 
-
+##### 常用命令
+1.-heap  打印堆总结
+````shell script
+[root@xianlong ~]# /usr/local/jdk1.8.0_181/bin/jmap -heap 25085  
+````
+2.-histo[:live]  打印堆的对象统计，包括对象数、内存大小等等
+````shell script
+[root@xianlong ~]# /usr/local/jdk1.8.0_181/bin/jmap -histo 25085  
+````
+3.生成dump文件
+````shell script
+[root@xianlong ~]# /usr/local/jdk1.8.0_181/bin/jmap -dump:live,format=b,file=heap.hprof 25085 
+````
 
 #### mat:
-http://www.eclipse.org/mat/downloads.php
-
+http://www.eclipse.org/mat/downloads.php  
+Java程序启动时，添加以下启动参数,程序OOM挂掉后，自动生成dump文件
+````shell script
+-XX:+HeapDumpOnOutOfMemoryError  
+````
 mat常用于分析dump文件
 
 #### jstack：
@@ -157,11 +235,11 @@ server-id 唯一id,假如一台主机上多个远程debug服务
 pid   需要被打印配置信息的java进程id,可以用jps查询.  
 
 ##### 案例
-jstack查看输出
+1.jstack 查看输出
 ````shell script
 jstack –l pid
 ````
-jstack统计线程数
+2.jstack 统计线程数
 ````shell script
 jstack -l pid| grep 'java.lang.Thread.State' | wc –l
 ````
