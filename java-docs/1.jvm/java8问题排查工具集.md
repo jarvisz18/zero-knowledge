@@ -89,13 +89,14 @@ Usage: jstat -help|-options
 |-gcold	|年老代和永生代行为统计|
 |-gcoldcapacity	|年老代行为统计|
 |-printcompilation	|输出已经被JIT编译的方法|
-outputOptions:  
+
+**outputOptions**:  
 一个或多个输出选项, 包括单个 stat选项, 加上任何-t、h 和 J 选项  
-vmid:  
+**vmid**:  
 虚拟机标识符 进程id  
-interval:  
+**interval**:  
 采样间隔在指定的单位，秒（s）或毫秒（ms）。默认单位是毫秒。必须是正整数。如果指定，JSTAT将在每个间隔产生其输出  
-count:  
+**count**:  
 显示的次数。默认值是无穷大；也就是说，JSTAT显示统计数据，直到目标JVM终止或JSTAT命令终止。必须是正整数  
 
 ##### 案例
