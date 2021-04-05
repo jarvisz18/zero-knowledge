@@ -8,7 +8,8 @@
 另外,使用-XX:+TraceClassPaths或者在服务器上执行jinfo时，  
 都能得到classpath包含的jar包  
 #### 2.打印出类的加载顺序
+需要在启动脚本中增加以下参数
 ````shell script
-XX:+TraceClassLoading
+-XX:+TraceClassLoading
 ````
 
