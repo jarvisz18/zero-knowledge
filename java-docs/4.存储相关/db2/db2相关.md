@@ -1,15 +1,15 @@
 #### 1.删除已经创建的索引
-````sql
+````shell script
 DROP INDEX "IFRS"."IDX_TABLE_NAME_INST_ID";
 COMMIT ;
 ````
 #### 2.备份表数据
-````sql
+````shell script
 create table user0708 like user;
 insert into user0708 select * from user;
 ````
 ####3.修改表字段长度
-````sql
+````shell script
 ALTER TABLE LAWSERVICE.T_TASK
   ALTER COLUMN TASK_CONTENT SET DATA TYPE CLOB(102400);
 COMMIT;
@@ -18,10 +18,21 @@ COMMIT;
 .原因：修改表结构表结构发生变化后再对表进行任何操作都不被允许，  
 SQLState为57016（因为表不活动，所以不能对其进行访问），由于修改了表字段权限，  
 导致表处于不可用状态
-````sql
+````shell script
 CALL SYSPROC.ADMIN_CMD('REORG TABLE tablename');
 example:
 CALL SYSPROC.ADMIN_CMD('REORG TABLE LAWSERVICE.T_TASK');
+````
+
+#### 5.主键删除添加
+````shell script
+ALTER TABLE Skills DELETE PRIMARY KEY
+ALTER TABLE Skills ADD PRIMARY KEY （SKILL_ID）
+````
+#### 6.DB2单个字段注释添加
+````shell script
+COMMENT ON TABLE T_TABLE IS '测试表';
+COMMENT ON COLUMN T_TABLE.START_TIME IS '请求开始时间';
 ````
 
 
