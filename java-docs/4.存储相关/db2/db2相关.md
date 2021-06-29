@@ -50,4 +50,44 @@ COMMENT ON COLUMN T_TABLE.START_TIME IS '请求开始时间';
     db2advis -d 库名 -i test.sql
 ````
 
+#### 8.db2中重要SQL
+````shell script
+查询某表下的索引
+select * from syscat.indexes where tabname = '表名'
+
+查询某schema下所有表
+SELECT TABNAME FROM syscat.tables where TABSCHEMA="demoschema"
+
+查询所有表信息
+select * from sysibm.systables where type='T' and creator='DB2ADMIN' ORDER BY NAME
+
+db2查询所有表中记录数大于0的表
+select tabname,card from syscat.TABLES where card >0 
+and tabschema = 'ZHYXDB' and tabname not like '%XD';
+
+查询某表下所有字段
+SELECT colname from syscat.columns where tabname='DIC_TB' and tabschema='DB2ADMIN'
+
+注意事项：
+1. DIS_TB是查询的表名，必须大写
+2. DB2ADMIN是登陆的用户名，必须大写
+
+复合性查询
+select * from table_name1
+where exists (
+  select * from table_name2
+  where conditions )
+````
+
+#### 9.比较有用的目录表
+
+SYSCAT.COLUMNS：包含每一行对应于表或视图中定义的列
+SYSCAT.INDEXCOLUSE：包含每一行包含的所有列
+SYSCAT.INDEXES：包含每一行对应于表或视图中定义的每个索引
+SYSCAT.TABLES：所创建每个表，视图，别名对应其中一行
+SYSCAT.VIEWS：所创建每个视图对应其中一行或几行
+
+通过索引保持数据唯一性：CREATE UNIQUE INDEX INDEXNAME ON TABLE (COLUMN)
+消除重复行：SELECT DISTINCT COLUMN FROM TABLE
+
 
