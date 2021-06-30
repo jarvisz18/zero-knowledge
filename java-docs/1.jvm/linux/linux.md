@@ -60,3 +60,9 @@ nohup /usr/java/jdk1.8.0_131/bin/java -Xms2048m -Xmx2048m -XX:MetaspaceSize=1024
 # find /opt -name *.log -mtime +30 -exec rm -rf {} \;
 ````
 
+#### 5.curl命令
+````shell script
+curl -i http://url/xxx
+可以查看响应头信息及返回值
+````
+
