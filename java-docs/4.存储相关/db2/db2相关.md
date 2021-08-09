@@ -15,7 +15,7 @@ ALTER TABLE LAWSERVICE.T_TASK
 COMMIT;
 ````
 ####4.解锁表
-.原因：修改表结构表结构发生变化后再对表进行任何操作都不被允许，  
+.原因 : 修改表结构表结构发生变化后再对表进行任何操作都不被允许，  
 SQLState为57016（因为表不活动，所以不能对其进行访问），由于修改了表字段权限，  
 导致表处于不可用状态
 ````shell script
@@ -36,17 +36,17 @@ COMMENT ON COLUMN T_TABLE.START_TIME IS '请求开始时间';
 ````
 #### 7.db2数据库创建索引，删除索引，查看表索引，SQL语句执行计划以及优化建议
 ````shell script
-1、建立表索引
+1.建立表索引
     create index 索引名 on 表名(列名，列名);
-2、删除表索引
+2.删除表索引
     drop index 索引名 on 表名;
-3、查看表索引
+3.查看表索引
     select * from sysibm.sysindexes where tbname='表名';   ---表名区分大小写
-    或者在后台可以用：
+    或者在后台可以用 : 
     describe indexes for table 表名;
-4、查看SQL语句执行计划
+4.查看SQL语句执行计划
     db2expln -d 库名 -f test.sql -t -g -z ";" > test.exp
-5、查看SQL语句索引优化建议
+5.查看SQL语句索引优化建议
     db2advis -d 库名 -i test.sql
 ````
 
@@ -68,7 +68,7 @@ and tabschema = 'ZHYXDB' and tabname not like '%XD';
 查询某表下所有字段
 SELECT colname from syscat.columns where tabname='DIC_TB' and tabschema='DB2ADMIN'
 
-注意事项：
+注意事项 : 
 1. DIS_TB是查询的表名，必须大写
 2. DB2ADMIN是登陆的用户名，必须大写
 
@@ -80,14 +80,20 @@ where exists (
 ````
 
 #### 9.比较有用的目录表
+````shell script
+SYSCAT.COLUMNS : 包含每一行对应于表或视图中定义的列
+SYSCAT.INDEXCOLUSE : 包含每一行包含的所有列
+SYSCAT.INDEXES : 包含每一行对应于表或视图中定义的每个索引
+SYSCAT.TABLES : 所创建每个表，视图，别名对应其中一行
+SYSCAT.VIEWS : 所创建每个视图对应其中一行或几行
 
-SYSCAT.COLUMNS：包含每一行对应于表或视图中定义的列
-SYSCAT.INDEXCOLUSE：包含每一行包含的所有列
-SYSCAT.INDEXES：包含每一行对应于表或视图中定义的每个索引
-SYSCAT.TABLES：所创建每个表，视图，别名对应其中一行
-SYSCAT.VIEWS：所创建每个视图对应其中一行或几行
+通过索引保持数据唯一性 : CREATE UNIQUE INDEX INDEXNAME ON TABLE (COLUMN)
+消除重复行 : SELECT DISTINCT COLUMN FROM TABLE
+````
 
-通过索引保持数据唯一性：CREATE UNIQUE INDEX INDEXNAME ON TABLE (COLUMN)
-消除重复行：SELECT DISTINCT COLUMN FROM TABLE
+#### 10.其他
+````shell script
+db2中clob字段不能进行模糊查询(like)
+````
 
 
