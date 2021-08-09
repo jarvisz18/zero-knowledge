@@ -12,4 +12,7 @@
 ````shell script
 -XX:+TraceClassLoading
 ````
+可以解决的问题:由于环境的不同，可能本地开发环境正常，但  
+是发布到线上就会出现class冲突，  
+可以在控制台打印出jvm加载类的日志
 
