@@ -66,3 +66,15 @@ curl -i http://url/xxx
 可以查看响应头信息及返回值
 ````
 
+#### 6.常用命令
+````shell script
+查看服务器版本
+uname -a
+cat /etc/os-release
+
+服务器系统
+cat /etc/issue
+或者
+cat /etc/redhat-release 
+`````
+
