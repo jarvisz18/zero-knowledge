@@ -54,3 +54,15 @@ find /opt/project -mtime +7 -name "*.log.*.gz" -exec rm -rf {} \;
 ## 每个文件上限大小，超过就触发分割
 -XX:GCLogFileSize=100M
 ````
+
+## 06.文件拆分
+````shell script
+## 将一个大文件拆分成若干个小文件，每个文件 100000 行
+split -l 100000 largeFile.txt -d -a 4 smallFile_
+
+## 将一个文件追加写入
+cat aaa.txt >> bbb.txt
+## 将一个文件覆盖写入(没有则创建)
+cat aaa.log > bbb.log
+cat aaa.log | grep 'exception' -C10 > bbb.log
+````
