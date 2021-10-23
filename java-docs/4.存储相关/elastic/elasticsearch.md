@@ -69,6 +69,47 @@ post _cache/_clear
 post /index/_cache/_clear
 ````
 
+#### 5.根据某字段范围查询，类型具有范围
+````jshelllanguage
+GET shakespeare/_search?size=10000
+{
+  "query": {
+    "range": {
+      "line_id": {
+        "gte": 1,
+        "lte": 2
+      }
+    }
+  }
+}
+````
+
+#### 6.重建索引-reindex(数据迁移)
+````jshelllanguage
+POST _reindex
+{
+  "source": {
+    "index": "shakespeare"
+  },
+  "dest": {
+    "index": "shakespeare-new"
+  }
+}
+````
+
+#### 7.新建索引模板
+````jshelllanguage
+PUT /_template/shakespeare
+{
+  "order": 0,
+  "index_patterns": [
+    "shakespeare-*"
+  ],
+  "aliases": {},
+  "mappings": {},
+  "settings": {}
+}
+````
 #### 10.注意事项
 + 若脚本指定sort排序字段，则评分为null
 
