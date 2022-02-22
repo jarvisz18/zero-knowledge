@@ -31,3 +31,46 @@ GET /shakespeare/_search
   }
 }
 ````
+
+#### 5.索引聚合统计
+````shell script
+GET /shakespeare/_search
+{
+  "size": 0,
+  "aggs": {
+    "doc_count": {
+      "range": {
+        "field": "play_name",
+        "ranges": [
+          {
+            "from": 5,
+            "to": 10
+          }
+        ]
+      }
+    }
+  }
+}
+````
+
+#### 6.根据条件删除索引
+````shell script
+POST empl/_delete_by_query
+{"query":{"match_all":{}}}
+````
+
+#### 7.查询某一天的数据量
+````shell script
+GET empl/_search
+{
+  "track_total_hits":true,
+  "query": {
+    "range": {
+      "age": {
+        "gte": 18,
+        "lte": 20
+      }
+    }
+  }
+}
+````
