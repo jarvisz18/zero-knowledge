@@ -1,0 +1,77 @@
+## Solr 知识积累
+
+#### 网址链接
+#### solr 快速入门
+````
+官方教程
+https://solr.apache.org/
+https://solr.apache.org/guide/solr/latest/getting-started/solr-tutorial.html
+https://solr.apache.org/guide/8_1/searching.html
+solr各版本使用参考指南
+https://solr.apache.org/guide/
+
+查询语法介绍
+https://www.cnblogs.com/leeSmall/p/9148360.html
+
+solr认证
+https://blog.csdn.net/qq_41212491/article/details/105849992
+管理界面
+https://blog.csdn.net/github_38974046/article/details/79739565
+Solr in查询语法
+https://blog.csdn.net/u013091013/article/details/77717674
+基本查询和高级查询
+https://blog.csdn.net/qq_15037231/article/details/79607435
+
+https://www.w3cschool.cn/solr_doc/solr_doc-1y5p2gmg.html
+https://blog.51cto.com/dechen/2797400
+https://yonik.com/solr/query-syntax/
+````
+
+#### 基础语法
+1.查询 name=zhangsan，查询语句 q= name:zhangsan  
+2.查询某个时间区间，查询语句 q= time:[2022-07-10 TO 2022-07-13]，如果时间带时分秒，solr查询时间使用UTC格式
+其中[]为开区间,()为闭区间，可以左开右闭  
+UTC时间格式: yyyy-MM-dd'T'HH:mm:ss.SSSZ  
+3.查询类型在某几个类型之间,查询语句 q= type:(8 148 103 418)  
+注意使用空格进行分隔  
+4.两个条件并且 使用 AND，两个条件或 使用 OR  
+5.fl : filed list ,用于指定需要返回的字段  
+6.facet，默认为false，指定为true时，可以设置facet.field，用于设置分组的字段  
+7.q与fq的区别，q查询是包含查询，计算评分score，fq是过滤查询，不计算评分score  
+8.分页，start设置起始，rows设置返回行数  
+9.排序，sort  
+
+#### 本地安装
+##### Window下启动和停止
+启动 Solr
+Solr 包括一个名为bin/solr(Linux/MacOS) 或bin\solr.cmd(Windows)的命令行界面工具。该工具允许您启动和停止 Solr、创建核心和集合、配置身份验证以及检查系统状态。
+要使用它来启动 Solr，只需在解压后的bin目录下打开命令行，执行命令：
+````
+./solr start
+````
+停止solr
+在bin目录下执行命令
+````
+./solr stop -p 8983
+````
+
+##### 启动报错
+````
+Java HotSpot(TM) 64-Bit Server VM warning: JVM cannot use large page memory because it does not have enough privilege to lock pages in memory.
+Waiting up to 30 to see Solr running on port 8983
+Started Solr server on port 8983. Happy searching!
+````
+问题描述：
+````
+windows启动solr报 Java HotSpot™ 64-Bit Server VM warning: JVM cannot use large page memory…异常。
+````
+解决方法：
+找到控制面板管理工具：
+点击本地安全策略,找到安全设置 > 本地策略 > 用户权限分配 > 锁定内存页
+点击打开输入“Everyone”，保存并应用，重启电脑后，再启动solr即可。
+
+#### 创建collection
+创建collection 就是 创建core，-c 指定创建的core名
+ ./solr create -c test_core1
+删除core，-c 指定创建的core名
+./solr delete -c test_core1
