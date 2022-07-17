@@ -57,9 +57,13 @@ analyzer ngram nested sort
 ````
 
 #### 3.索引关闭与开启
+1.可以打开一个已经打开/关闭的索引，以最后一次操作为准  
+2.可以关闭一个已经关闭/打开的索引，以最后一次操作为准  
+3.关闭的索引只能查看index的配置信息，不能对内部的索引数据进行读写操作  
 ````shell script
-post /index/_close
-post /index/_open
+POST /index/_close
+POST /index/_open
+// 可以使用_all 打开或关闭全部索引,也可以使用通配符(*)配合操作
 ````
 
 #### 4.索引缓存刷新清空
