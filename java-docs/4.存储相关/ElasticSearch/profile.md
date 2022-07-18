@@ -1,13 +1,17 @@
 ## 检索性能分析：Profile API
-####使用方法
+
+#### 使用方法
 启用profile，只需要在查询中加入 "profile": true即可。
+
 ````json
 {
     "profile": "true",
     "query": {}
 }
 ````
+
 #### Profile API响应说明
+
 + Query  
 Query 段由构成Query的元素以及它们的时间信息组成。Profile API结果中Query 部分的基本组成是：  
 query type ：显示哪种类型的查询被触发。  
@@ -21,4 +25,3 @@ children – 具有多个关键字的查询被拆分成相应术语的布尔查�
 
 + Collectors  
 在Lucene中，收集器是负责收集原始结果，收集和组合结果，执行结果排序等的过程。
-

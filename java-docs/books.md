@@ -1,4 +1,5 @@
 #### 推荐书籍
+
 1. 《深入理解Java虚拟机》
 2. 《Effective Java》
 3. 《深入分析Java Web技术内幕》
@@ -13,48 +14,62 @@
 12. 《架构即未来》
 
 #### 常用链接
+
 JVM系列
-+ https://zhuanlan.zhihu.com/p/34426768?utm_source=wechat_session&utm_medium=social&utm_oi=656637143959605248&utm_campaign=shareopn
+
++ <https://zhuanlan.zhihu.com/p/34426768?utm_source=wechat_session&utm_medium=social&utm_oi=656637143959605248&utm_campaign=shareopn>
 
 python-web-guide
-+ https://python-web-guide.readthedocs.io/zh/latest/index.html
+
++ <https://python-web-guide.readthedocs.io/zh/latest/index.html>
 
 spring-cloud
-+ http://www.itmuch.com/
-+ http://springcloud.fun/
-+ https://www.springcloud.cc/spring-cloud-dalston.html
-+ https://developer.ibm.com/zh/articles/os-cn-spring-cache/
+
++ <http://www.itmuch.com/>
++ <http://springcloud.fun/>
++ <https://www.springcloud.cc/spring-cloud-dalston.html>
++ <https://developer.ibm.com/zh/articles/os-cn-spring-cache/>
 
 ElasticSearch
-+ https://elasticsearch.cn/
-+ https://github.com/elastic
-+ https://www.elastic.co/guide/en/elasticsearch/reference/7.2/getting-started.html
-+ 
+
++ <https://elasticsearch.cn/>
++ <https://github.com/elastic>
++ <https://www.elastic.co/guide/en/elasticsearch/reference/7.2/getting-started.html>
+
++
 
 mybatis
-+ http://mybatis.org/spring/zh/index.html
-+ https://zerolee1993.github.io/mysql-guide/
+
++ <http://mybatis.org/spring/zh/index.html>
++ <https://zerolee1993.github.io/mysql-guide/>
 
 kafka相关
-+ https://www.jianshu.com/p/9e72b3942c59
-+ http://kafka.apache.org/
-+ https://blog.csdn.net/tangdong3415/article/details/53432166/
+
++ <https://www.jianshu.com/p/9e72b3942c59>
++ <http://kafka.apache.org/>
++ <https://blog.csdn.net/tangdong3415/article/details/53432166/>
 
 guava教程
-+ https://www.yiibai.com/guava/
-+ http://ifeve.com/google-guava/
+
++ <https://www.yiibai.com/guava/>
++ <http://ifeve.com/google-guava/>
 
 docker学习网站
-+ https://wiki.archlinux.org/index.php/Docker
-+ https://wiki.openstack.org/wiki/Docker
-+ http://www.apgblogs.com/category/docker/
+
++ <https://wiki.archlinux.org/index.php/Docker>
++ <https://wiki.openstack.org/wiki/Docker>
++ <http://www.apgblogs.com/category/docker/>
 
 Go
-+ https://tour.go-zh.org/welcome/1
+
++ <https://tour.go-zh.org/welcome/1>
 
 Flink
-+ https://flink-learning.org.cn/article/lingjichurumenjiaocheng/1
+
++ <https://flink-learning.org.cn/article/lingjichurumenjiaocheng/1>
 
 #### 工具
+
 文档工具
-+ https://zealdocs.org/
+
++ <https://zealdocs.org/>
