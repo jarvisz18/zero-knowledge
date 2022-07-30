@@ -48,8 +48,8 @@ git commit-a-v 一般提交命令
 #### 4.撤销git commit的内容
 
 ````shell script
-git reset --soft HEAD^  撤销commit，但是不撤销add动作
-git reset --hard HEAD^  撤销commit，并且撤销add动作
+git reset --soft HEAD^  撤销commit, 但是不撤销add动作
+git reset --hard HEAD^  撤销commit, 并且撤销add动作
 git reset HEAD <文件名>  撤回add动作
 git checkout .          丢弃本次修改的内容
 ````

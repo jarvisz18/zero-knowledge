@@ -3,17 +3,17 @@
 -- postgresql
 --
 --1.查询pg下所有表名
-select tablename from pg_tables where schemaname = 'jrzjdb';
+select tablename from pg_tables where schemaname = 'testdb';
 
 --2.查询pg下某表下所有字段
 select * from information_schema.columns c
-where table_schema = 'jrzjdb' and table_name = 't_area'
+where table_schema = 'testdb' and table_name = 't_area'
 order by ordinal_position;
 
 --3.查询pg某表下所有字段及对应的数据量
 select schemaname, relname, n_live_tup
 from pg_catalog.pg_stat_user_tables
-where schemaname = 'jrzjdb'
+where schemaname = 'testdb'
 order by n_live_tup desc;
 
 --4.获取当前时间戳
