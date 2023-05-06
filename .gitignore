@@ -1,2 +1,7 @@
 /.idea/*
+/.gitee/*
+
+## mac .DS_Store
+.DS_Store
+*/.DS_Store
 /zero-knowledge.iml
