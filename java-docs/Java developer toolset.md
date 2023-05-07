@@ -1,4 +1,4 @@
-# Java Developer 常用网站及工具集
+# Java Developer Tool Set
 
 ## 1.搜索引擎
 
@@ -8,6 +8,19 @@
 | 2.Stackoverflow | <https://stackoverflow.com> | 问题查找 |
 | 3.GitHub | <https://github.com> | source code |
 | 4.码云Gitee | <https://gitee.com> | source code|
+| 5.腾讯云| <https://cloud.tencent.com/developer>| 开发者社区 |
+| 6.程序员搜索 | <https://goobe.io/> | 搜索 |
+| 7.我爱分享网 | <http://www.zhanshaoyi.com/rjxz.html> |搜索 |
+| 8.gitlog | <https://www.gitlogs.com/> | 搜索 |
+| 9.小白盘  | <https://www.xiaobaipan.com/> | 搜索 |
+| 10.鸠摩搜索 | <https://www.jiumosearch.com/> | 搜索 |
+| 11.博客园 |  <https://www.cnblogs.com/> | 搜索 |
+| 12.菜鸟工具  | <https://c.runoob.com/>  | 工具 |
+| 13.爱资料工具 | <https://www.toolnb.com/> | 工具 |
+| 14.OSChina  | <https://www.oschina.net/> | 开源中国 |
+| 15.helloword | <https://www.helloworld.net/> | 搜索 |
+| 16.虫部落 | <https://search.chongbuluo.com/> | 搜索  |
+| 17.dcloud | <https://ask.dcloud.net.cn/explore/> | 问答社区 |
 
 ## 2.开发常用
 
