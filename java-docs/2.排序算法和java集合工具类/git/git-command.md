@@ -1,6 +1,6 @@
 ## Git实用命令
 
-#### 1远程仓库相关命令  
+#### 1.远程仓库相关命令  
 
 ````shell script
 检出仓库: $ git clone  git://github.com/jquery/jquery.git  
@@ -13,7 +13,7 @@
 推送远程仓库: $ git push [remoteName][localBranchName]  
 ````
 
-#### 2.git比较两个分支的文件的差异
+#### 2.git 比较两个分支的文件的差异
 
 ````shell script
 显示出所有有差异的文件列表: $ git diff branch1 branch2 --stat
@@ -52,4 +52,54 @@ git reset --soft HEAD^  撤销commit, 但是不撤销add动作
 git reset --hard HEAD^  撤销commit, 并且撤销add动作
 git reset HEAD <文件名>  撤回add动作
 git checkout .          丢弃本次修改的内容
+````
+
+#### 5.git command(本地分支查看及配置)
+
+````shell script
+git branch -r  查看远程分支
+git branch -a  查看远程和本地分支
+git branch     查看本地分支
+
+-- 拉取远程分支并创建本地分支
+默认切换到新分支: git checkout -b 本地分支名x origin/远程分支名x
+需要手动切换:    git fetch origin 远程分支名x:本地分支名x
+
+-- 本地新分支关联上远程分支, 并推送
+关联: git branch --set-upstream-to=origin/远程分支名 本地分支名
+推送: git push origin HEAD:远程分支名
+````
+
+##### 6.git command (强制刷新分支列表)
+
+由于在远程删除了分支，有时候本地不能更新到，所以再次操作已删除的分支时git会报错，
+此时只需要刷新一下分支列表即可正常操作，git命令如下：
+
+````shell script
+git remote update origin --prune
+
+或者简写为
+git remote update origin --p
+````
+
+#### 7.git查看用户名和邮箱
+
+````shell script
+//查看所有配置
+git config -l
+//查看系统配置
+git config --system --list
+//查看用户自己配置
+git config --global --list
+
+检查配置
+git config --global user.name
+git config --global user.email
+
+查看Git本地用户名及邮箱配置
+git config --global user.name and git config --global user.email
+
+配置用户名及邮箱
+git config --global user.name  "your name"
+git config --global user.email "your email address"
 ````
